@@ -1,0 +1,20 @@
+@import "../../essentials";
+
+.filter {
+  input {
+    height: 50px;
+    width: 350px;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    background: $bg-color;
+    color: $text-color;
+    font-size: $font-size-text;
+    &:focus {
+      outline: none;
+      background: $input-bg-color;
+    }
+    &::placeholder {
+      color: $text-color;
+    }
+  }
+}

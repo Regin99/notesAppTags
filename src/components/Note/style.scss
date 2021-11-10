@@ -1,0 +1,103 @@
+@import "../../essentials";
+
+.note-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  height: 75px;
+  width: 354px;
+  &:hover {
+    .delete-icon {
+      display: block;
+    }
+  }
+}
+
+.note-container-edit {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  height: 75px;
+  width: 300px;
+}
+
+.note-tag-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.note-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.selected {
+  position: relative;
+  width: 1000px;
+  height: 300px;
+  background-color: $input-bg-color;
+  .textarea {
+    background-color: #f2f2f2;
+    flex: 1;
+    font-size: $font-size-text;
+    margin: 0 0;
+    height: 250px;
+    display: inline-block;
+  }
+
+  .note-tags,
+  .note-text {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: ellipsis;
+  }
+  .delete-icon {
+    display: block;
+  }
+}
+
+.note-tags {
+  display: flex;
+}
+
+.note-text {
+  color: $text-color;
+  flex: 1;
+  font-size: $font-size-text;
+  margin: 3px 2px;
+}
+
+.note-text,
+.note-tags {
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+svg {
+  width: $icon-width;
+  height: $icon-height;
+  fill: $text-color;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+}
+.delete-icon {
+  display: none;
+  fill: black;
+  width: 10px;
+  height: 10px;
+}
+
+.highlight {
+  background-color: $highlight-color;
+  box-sizing: border-box;
+  border-radius: $border-radius;
+}
