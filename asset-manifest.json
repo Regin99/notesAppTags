@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/notesAppTags/static/css/main.cbd6fa2d.chunk.css",
+    "main.js": "/notesAppTags/static/js/main.ffd85b28.chunk.js",
+    "main.js.map": "/notesAppTags/static/js/main.ffd85b28.chunk.js.map",
+    "runtime-main.js": "/notesAppTags/static/js/runtime-main.2f1ff54c.js",
+    "runtime-main.js.map": "/notesAppTags/static/js/runtime-main.2f1ff54c.js.map",
+    "static/js/2.984ea03c.chunk.js": "/notesAppTags/static/js/2.984ea03c.chunk.js",
+    "static/js/2.984ea03c.chunk.js.map": "/notesAppTags/static/js/2.984ea03c.chunk.js.map",
+    "index.html": "/notesAppTags/index.html",
+    "static/css/main.cbd6fa2d.chunk.css.map": "/notesAppTags/static/css/main.cbd6fa2d.chunk.css.map",
+    "static/js/2.984ea03c.chunk.js.LICENSE.txt": "/notesAppTags/static/js/2.984ea03c.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2f1ff54c.js",
+    "static/js/2.984ea03c.chunk.js",
+    "static/css/main.cbd6fa2d.chunk.css",
+    "static/js/main.ffd85b28.chunk.js"
+  ]
+}
