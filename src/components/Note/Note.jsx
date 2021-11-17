@@ -1,34 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./style.scss";
 import Delete from "./Delete";
 import Edit from "./Edit";
 import Save from "./Save";
 import DeleteTag from "./DeleteTag";
+import Highlighter from "react-highlight-words";
+import { HighlightWithinTextarea } from "react-highlight-within-textarea";
 
 export const Note = ({ setNotes, note, notes, isActive }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [noteText, setNoteText] = useState(note.text);
-  const [textWithTags, setTextWithTags] = useState(null);
-  const [tags, setTags] = useState(null);
-
-  const getHighlightedText = (text) => {
-    const regex = /(#\w+)/g;
-
-    return text.split(regex).map((part, i) => {
-      return part.match(regex) ? (
-        <span key={i} className="highlight">
-          {part}
-        </span>
-      ) : (
-        part
-      );
-    });
-  };
-
-  useEffect(() => {
-    setTextWithTags(getHighlightedText(noteText));
-    setTags(noteText.match(/#\w+/g));
-  }, [noteText]);
+  const [tags, setTags] = useState(note.text.match(/#\S+/g));
 
   const handleDelete = () => {
     const newNotes = notes.filter((n) => n.id !== note.id);
@@ -47,16 +29,25 @@ export const Note = ({ setNotes, note, notes, isActive }) => {
     setIsEditing(false);
   };
 
-  const handleEdit = (e) => {
-    setIsEditing(true);
-    setTextWithTags(getHighlightedText(noteText));
+  const handleChange = (value) => {
+    setTags(value.match(/#\S+/g));
+    setNoteText(value);
   };
 
-  const handleChange = (e) => {
-    setTags(e.target.textContent.match(/#\w+/g));
+  const handleEdit = (e) => {
+    setIsEditing(true);
   };
 
   const handleSelect = (e) => {
+    if (
+      e.target.parentElement.parentElement.parentElement.parentElement.classList.contains(
+        "note-container"
+      )
+    ) {
+      e.target.parentElement.parentElement.parentElement.parentElement.classList.toggle(
+        "selected"
+      );
+    }
     if (
       e.target.parentElement.parentElement.classList.contains("note-container")
     ) {
@@ -68,7 +59,7 @@ export const Note = ({ setNotes, note, notes, isActive }) => {
     const tag = e.target.parentElement.parentElement.parentElement.innerText;
     const newText = noteText.replace(tag, "");
     setNoteText(newText);
-    setTags(newText.match(/#\w+/g));
+    setTags(newText.match(/#\S+/g));
     setNotes(
       notes.map((n) => (n.id === note.id ? { ...n, text: newText } : n))
     );
@@ -78,14 +69,14 @@ export const Note = ({ setNotes, note, notes, isActive }) => {
     isEditing ? (
       <div className="note-container-edit selected">
         <div className="note-main">
-          <div
-            onInput={handleChange}
-            contentEditable
-            suppressContentEditableWarning={true}
-            className="textarea">
-            {textWithTags}
+          <div className="textarea">
+            <HighlightWithinTextarea
+              className="textarea"
+              value={noteText}
+              highlight={[{ highlight: tags, className: "highlight" }]}
+              onChange={handleChange}
+            />
           </div>
-
           <Save handleSave={handleSave} />
           <Delete handleDelete={handleDelete} />
         </div>
@@ -105,7 +96,15 @@ export const Note = ({ setNotes, note, notes, isActive }) => {
       <div className="note-container">
         <div className="note-main">
           <p className="note-text" onClick={handleSelect}>
-            {textWithTags}
+            {!!tags ? (
+              <Highlighter
+                highlightClassName="highlight"
+                searchWords={tags}
+                textToHighlight={noteText}
+              />
+            ) : (
+              noteText
+            )}
           </p>
           <Edit handleEdit={handleEdit} />
           <Delete handleDelete={handleDelete} />

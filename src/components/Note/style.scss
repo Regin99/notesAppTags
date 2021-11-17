@@ -25,7 +25,9 @@
 
 .note-tag-container {
   display: flex;
+  text-overflow: ellipsis;
   flex-direction: row;
+  max-width: 150px;
   justify-content: space-between;
   align-items: center;
 }
@@ -46,6 +48,7 @@
     flex: 1;
     font-size: $font-size-text;
     margin: 0 0;
+    width: 900px;
     height: 250px;
     display: inline-block;
   }
@@ -53,7 +56,7 @@
   .note-tags,
   .note-text {
     white-space: normal;
-    overflow: visible;
+    overflow-wrap: break-word;
     text-overflow: ellipsis;
   }
   .delete-icon {
